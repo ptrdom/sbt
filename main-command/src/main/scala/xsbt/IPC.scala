@@ -40,7 +40,7 @@ object IPC {
       if (attempts > 0) {
         try {
           println(s"creating server on port [$nextPort]")
-          val serverSocket = new ServerSocket(nextPort, 1, loopback)
+          val serverSocket = new ServerSocket(nextPort, 50, loopback)
           println(s"created server on port [$nextPort]")
           serverSocket
         }
