@@ -15,8 +15,8 @@ import scala.annotation.tailrec
 import scala.util.control.NonFatal
 
 object IPC {
-  private val portMin = 8000
-  private val portMax = 9000
+  private val portMin = 1025
+  private val portMax = 65536
   private val loopback = InetAddress.getByName(null)
 
   def client[T](port: Int)(f: IPC => T): T = {
@@ -40,7 +40,7 @@ object IPC {
       if (attempts > 0) {
         try {
           println(s"creating server on port [$nextPort]")
-          val serverSocket = new ServerSocket(nextPort, 50, loopback)
+          val serverSocket = new ServerSocket(nextPort, 1, loopback)
           println(s"created server on port [$nextPort]")
           serverSocket
         }
