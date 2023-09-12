@@ -39,9 +39,10 @@ object IPC {
     def createServer(attempts: Int): ServerSocket =
       if (attempts > 0) {
         try {
-          println(s"creating server on port [$nextPort]")
-          val serverSocket = new ServerSocket(nextPort, 1, loopback)
-          println(s"created server on port [$nextPort]")
+          val maybePort = nextPort
+          println(s"creating server on port [$maybePort]")
+          val serverSocket = new ServerSocket(maybePort, 50, loopback)
+          println(s"created server on port [$maybePort]")
           serverSocket
         }
         catch { case NonFatal(_) => createServer(attempts - 1) }
